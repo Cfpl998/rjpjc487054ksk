@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>应用资源库</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen m-0 p-0">
+
+<!-- 卡密验证页 -->
+<div id="login_page" class="fixed inset-0 bg-white z-50 flex justify-center items-center">
+  <div class="w-full max-w-sm p-6">
+    <h2 class="text-xl font-bold text-center mb-4">访问验证</h2>
+    <input id="input_code" type="text" placeholder="请输入卡密"
+      class="w-full p-3 border border-gray-300 rounded-lg mb-4">
+    <button id="btn_login" class="w-full bg-indigo-600 text-white p-3 rounded-lg">
+      验证并进入
+    </button>
+    <p id="err_tip" class="text-red-500 text-center mt-3 hidden">卡密无效或已使用</p>
+  </div>
+</div>
+
+<!-- 应用资源库 -->
+<div id="app_page" class="hidden p-5 max-w-5xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+    <h1 class="text-2xl font-bold">星漫次元应用资源库</h1>
+    <div class="flex flex-wrap gap-2">
+      <button class="filter-btn active px-4 py-1 rounded-full bg-indigo-600 text-white text-sm" data-cat="all">全部</button>
+      <button class="filter-btn px-4 py-1 rounded-full bg-gray-200 text-sm" data-cat="anime">破解</button>
+      <button class="filter-btn px-4 py-1 rounded-full bg-gray-200 text-sm" data-cat="doman">动漫</button>
+      <button class="filter-btn px-4 py-1 rounded-full bg-gray-200 text-sm" data-cat="game">游戏</button>
+      <button class="filter-btn px-4 py-1 rounded-full bg-gray-200 text-sm" data-cat="Video">影视</button>
+      <button class="filter-btn px-4 py-1 rounded-full bg-gray-200 text-sm" data-cat="gg">必看官方</button>
+     
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+    <!-- 樱花动漫Pro -->
+    <div class="app-item" data-cat="anime">
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+<img src="https://free-img.400040.xyz/4/2026/03/10/69aff1b217f2c.png" class="h-48 w-full object-cover" alt="封面图">
+        <div class="p-5">
+          <h3 class="font-bold text-lg mb-2">海角尊享版</h3>
+          <div class="flex gap-2 mb-2">
+            <span class="px-2 py-0.5 bg-pink-100 text-pink-600 text-xs rounded">破解版</span>
+            <span class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded">无限积分</span>
+            <span class="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded">短长视频</span>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">
+            星漫次元独家破解的海角社区 支持短视频快刷 支持观看长视频 破解无限积分可解锁视频 视频真实
+          </p>
+          <p class="text-xs text-gray-500 mb-4">支持：安卓 </p>
+          <div class="flex gap-3">
+            <button onclick="openDetail('海角', '星漫次元独家破解 请务必观看内置的公告 不然后果自负', '安卓 ')" class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg text-sm">查看详情</button>
+            <button onclick="toDownload('https://a24fa49c.k-vault-6xf.pages.dev/file/BQACAgUAAyEGAATgVttGAAMIabQeHQTBTvVr6nevL3SF4c4R9MsAAh0eAAKLCqBVrmoXrSV0gso6BA.apk')" class="flex-1 bg-indigo-600 text-white py-2 rounded-lg text-sm">立即下载</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 星辰影视大全 -->
+    <div class="app-item" data-cat="gg">
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <div class="h-48 bg-gray-50"></div>
+        <div class="p-5">
+          <h3 class="font-bold text-lg mb-2">必看公告</h3>
+          <div class="flex gap-2 mb-2">
+            <span class="px-2 py-0.5 bg-purple-100 text-purple-600 text-xs rounded">官方公告</span>
+            <span class="px-2 py-0.5 bg-orange-100 text-orange-600 text-xs rounded">必须观看</span>
+            <span class="px-2 py-0.5 bg-red-100 text-red-600 text-xs rounded">置顶</span>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">
+            必须观看
+          </p>
+          <p class="text-xs text-gray-500 mb-4">支持：PC / 安卓 / 电视盒子</p>
+          <div class="flex gap-3">
+            <button onclick="openDetail('无', '不看出错别来麻烦客服 如果看了还是出错的话，再联系客服', 'PC / 安卓 / 电视盒子')" class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg text-sm">查看详情</button>
+            <button onclick="toDownload('https://i.ibb.co/7x5qRvJN/2026031018481692.jpg')" class="flex-1 bg-indigo-600 text-white py-2 rounded-lg text-sm">立即查看</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 游戏魔盒Pro -->
+    <div class="app-item" data-cat="game">
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <div class="h-48 bg-gray-50"></div>
+        <div class="p-5">
+          <h3 class="font-bold text-lg mb-2">游戏魔盒Pro</h3>
+          <div class="flex gap-2 mb-2">
+            <span class="px-2 py-0.5 bg-yellow-100 text-yellow-600 text-xs rounded">汉化</span>
+            <span class="px-2 py-0.5 bg-teal-100 text-teal-600 text-xs rounded">破解</span>
+            <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">海量资源</span>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">
+            精选海内外优质游戏，含汉化版、破解版，一键安装无需ROOT，畅玩无压力！
+          </p>
+          <p class="text-xs text-gray-500 mb-4">支持：安卓（全机型）</p>
+          <div class="flex gap-3">
+            <button onclick="openDetail('游戏魔盒Pro', '精选海内外优质游戏，含汉化版、破解版，一键安装无需ROOT，畅玩无压力！', '安卓（全机型）')" class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg text-sm">查看详情</button>
+            <button onclick="toDownload('https://www.baidu.com')" class="flex-1 bg-indigo-600 text-white py-2 rounded-lg text-sm">立即下载</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 详情弹窗 -->
+<div id="detail_modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex justify-center items-center p-4">
+  <div class="bg-white rounded-xl shadow-2xl max-w-md w-full">
+    <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+      <h3 id="detail_title" class="font-bold text-xl"></h3>
+      <button onclick="closeDetail()" class="text-gray-500 text-2xl">&times;</button>
+    </div>
+    <div class="p-5">
+      <p id="detail_desc" class="text-sm text-gray-600 mb-3"></p>
+      <p id="detail_platform" class="text-xs text-gray-500 mb-4"></p>
+      <button onclick="toDownload('https://xmcyw.91svip.eu.cc/')" class="w-full bg-indigo-600 text-white py-2 rounded-lg">立即下载</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== 多卡密配置（可添加多个）=====================
+const VALID_KEYS = ["test123", "demo456", "vip77"];
+
+// 本地存储已使用卡密（刷新/换浏览器也不会恢复）
+function getUsedKeys() {
+  return JSON.parse(localStorage.getItem("used_keys") || "[]");
+}
+function setUsedKey(key) {
+  const used = getUsedKeys();
+  used.push(key);
+  localStorage.setItem("used_keys", JSON.stringify(used));
+}
+
+// 卡密验证
+document.getElementById("btn_login").addEventListener("click", () => {
+  const val = document.getElementById("input_code").value.trim();
+  const used = getUsedKeys();
+  if (VALID_KEYS.includes(val) && !used.includes(val)) {
+    setUsedKey(val);
+    document.getElementById("login_page").classList.add("hidden");
+    document.getElementById("app_page").classList.remove("hidden");
+  } else {
+    const tip = document.getElementById("err_tip");
+    tip.classList.remove("hidden");
+    setTimeout(() => tip.classList.add("hidden"), 2000);
+  }
+});
+
+// 下载跳转
+function toDownload(url) {
+  window.open(url, "_blank");
+}
+
+// 详情弹窗
+function openDetail(title, desc, platform) {
+  document.getElementById("detail_title").innerText = title;
+  document.getElementById("detail_desc").innerText = desc;
+  document.getElementById("detail_platform").innerText = "支持：" + platform;
+  document.getElementById("detail_modal").classList.remove("hidden");
+}
+function closeDetail() {
+  document.getElementById("detail_modal").classList.add("hidden");
+}
+
+// 分类筛选
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll(".filter-btn").forEach(b => {
+      b.classList.remove("active", "bg-indigo-600", "text-white");
+      b.classList.add("bg-gray-200");
+    });
+    this.classList.add("active", "bg-indigo-600", "text-white");
+    this.classList.remove("bg-gray-200");
+    const cat = this.dataset.cat;
+    document.querySelectorAll(".app-item").forEach(item => {
+      if (cat === "all" || item.dataset.cat === cat) {
+        item.classList.remove("hidden");
+      } else {
+        item.classList.add("hidden");
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
