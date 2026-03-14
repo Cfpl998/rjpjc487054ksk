@@ -124,33 +124,61 @@
 </div>
 
 <script>
-// ===================== 多卡密配置（可添加多个）=====================
+// ================= 多卡配置（可添加多个） =================
 const VALID_KEYS = ["test123", "demo456", "vip77"];
 
-// 本地存储已使用卡密（刷新/换浏览器也不会恢复）
-function getUsedKeys() {
-  return JSON.parse(localStorage.getItem("used_keys") || "[]");
+// 🔴 核心修改：获取“卡密已被哪个设备使用”的存储
+function getLockedMap() {
+    return JSON.parse(localStorage.getItem("locked_map") || "{}");
 }
-function setUsedKey(key) {
-  const used = getUsedKeys();
-  used.push(key);
-  localStorage.setItem("used_keys", JSON.stringify(used));
+
+// 🔴 核心修改：保存卡密与设备的绑定
+function saveLockedMap(key, deviceId) {
+    const map = getLockedMap();
+    map[key] = deviceId;
+    localStorage.setItem("locked_map", JSON.stringify(map));
+}
+
+// 🔴 核心修改：生成简单设备ID（不干扰你原有样式）
+function getDeviceId() {
+    const ua = navigator.userAgent;
+    const screen = window.screen.width + "x" + window.screen.height;
+    return btoa(ua + screen).substring(0, 20);
 }
 
 // 卡密验证
 document.getElementById("btn_login").addEventListener("click", () => {
-  const val = document.getElementById("input_code").value.trim();
-  const used = getUsedKeys();
-  if (VALID_KEYS.includes(val) && !used.includes(val)) {
-    setUsedKey(val);
+    const val = document.getElementById("input_code").value.trim();
+    const tip = document.getElementById("err_tip");
+    const currentDevice = getDeviceId();
+    const lockedMap = getLockedMap();
+
+    // 1. 检查卡密是否有效
+    if (!VALID_KEYS.includes(val)) {
+        tip.classList.remove("hidden");
+        setTimeout(() => tip.classList.add("hidden"), 2000);
+        return;
+    }
+
+    // 2. 🔴 核心逻辑：
+    //    如果卡密已被锁定，且锁定的不是当前设备 → 报错
+    //    如果卡密已被当前设备锁定 → 直接通过
+    if (lockedMap[val]) {
+        if (lockedMap[val] !== currentDevice) {
+            tip.classList.remove("hidden");
+            setTimeout(() => tip.classList.add("hidden"), 2000);
+            return;
+        }
+    } else {
+        // 3. 第一次使用 → 锁定给当前设备
+        saveLockedMap(val, currentDevice);
+    }
+
+    // 4. 验证成功
     document.getElementById("login_page").classList.add("hidden");
     document.getElementById("app_page").classList.remove("hidden");
-  } else {
-    const tip = document.getElementById("err_tip");
-    tip.classList.remove("hidden");
-    setTimeout(() => tip.classList.add("hidden"), 2000);
-  }
 });
+
 
 // 下载跳转
 function toDownload(url) {
